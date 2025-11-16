@@ -68,6 +68,8 @@ export interface DmuxSettings {
   enableAutopilotByDefault?: boolean;
   // Agent selection
   defaultAgent?: 'claude' | 'opencode';
+  // Permission mode for Claude Code
+  skipPermissions?: boolean;
 }
 
 export type SettingsScope = 'global' | 'project';

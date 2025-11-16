@@ -197,12 +197,22 @@ export default function MergePane({ pane, onComplete, onCancel, mainBranch }: Me
     setShowAgentPromptInput(true);
   };
 
-  const submitAgentResolution = () => {
+  const submitAgentResolution = async () => {
     setShowAgentPromptInput(false);
     setStatus('resolving-with-agent');
 
     // Get the main repository path
     const mainRepoPath = pane.worktreePath?.replace(/\/\.dmux\/worktrees\/[^/]+$/, '');
+
+    // Load settings to check for skipPermissions
+    const { SettingsManager } = await import('../../utils/settingsManager.js');
+    const settingsManager = new SettingsManager(mainRepoPath || process.cwd());
+    const settings = settingsManager.getSettings();
+
+    // Determine permission flag based on settings
+    const permissionFlag = settings.skipPermissions
+      ? '--dangerously-skip-permissions'
+      : '--permission-mode=acceptEdits';
 
     // Exit the app and launch agent with conflict resolution prompt
     const fullPrompt = agentPrompt || `Fix the merge conflicts in the following files: ${conflictFiles.join(', ')}. Resolve them appropriately based on the changes from branch ${pane.slug} (${pane.prompt}) and ensure the code remains functional.`;
@@ -212,7 +222,7 @@ export default function MergePane({ pane, onComplete, onCancel, mainBranch }: Me
 
     // Launch Claude to resolve conflicts in the main repository
     try {
-      execSync(`claude "${fullPrompt}" --permission-mode=acceptEdits`, {
+      execSync(`claude "${fullPrompt}" ${permissionFlag}`, {
         stdio: 'inherit',
         cwd: mainRepoPath || process.cwd()
       });

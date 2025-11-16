@@ -1,0 +1,74 @@
+[
+  {
+    "session_id": "e73c4877-db7b-4d9a-9a58-1ec7e0237766",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/e73c4877-db7b-4d9a-9a58-1ec7e0237766.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "acceptEdits",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "e73c4877-db7b-4d9a-9a58-1ec7e0237766",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/e73c4877-db7b-4d9a-9a58-1ec7e0237766.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "acceptEdits",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "e73c4877-db7b-4d9a-9a58-1ec7e0237766",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/e73c4877-db7b-4d9a-9a58-1ec7e0237766.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "acceptEdits",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "e73c4877-db7b-4d9a-9a58-1ec7e0237766",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/e73c4877-db7b-4d9a-9a58-1ec7e0237766.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "plan",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "a9185eb7-ed7a-4849-946b-f84a307d6436",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/a9185eb7-ed7a-4849-946b-f84a307d6436.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "a9185eb7-ed7a-4849-946b-f84a307d6436",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/a9185eb7-ed7a-4849-946b-f84a307d6436.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "a9185eb7-ed7a-4849-946b-f84a307d6436",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/a9185eb7-ed7a-4849-946b-f84a307d6436.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "a9185eb7-ed7a-4849-946b-f84a307d6436",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/a9185eb7-ed7a-4849-946b-f84a307d6436.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "a9185eb7-ed7a-4849-946b-f84a307d6436",
+    "transcript_path": "/Users/dylan/.claude/projects/-Users-dylan-projects-others-dmux/a9185eb7-ed7a-4849-946b-f84a307d6436.jsonl",
+    "cwd": "/Users/dylan/projects/others/dmux",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  }
+]

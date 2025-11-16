@@ -352,6 +352,11 @@ export async function createPane(
 
   // Launch agent if specified
   if (agent === 'claude') {
+    // Determine permission flag based on settings
+    const permissionFlag = settings.skipPermissions
+      ? '--dangerously-skip-permissions'
+      : '--permission-mode=acceptEdits';
+
     let claudeCmd: string;
     if (prompt && prompt.trim()) {
       const escapedPrompt = prompt
@@ -359,9 +364,9 @@ export async function createPane(
         .replace(/"/g, '\\"')
         .replace(/`/g, '\\`')
         .replace(/\$/g, '\\$');
-      claudeCmd = `claude "${escapedPrompt}" --permission-mode=acceptEdits`;
+      claudeCmd = `claude "${escapedPrompt}" ${permissionFlag}`;
     } else {
-      claudeCmd = `claude --permission-mode=acceptEdits`;
+      claudeCmd = `claude ${permissionFlag}`;
     }
     // Send the claude command (auto-quoted by sendShellCommand)
     await tmuxService.sendShellCommand(paneInfo, claudeCmd);
@@ -369,9 +374,12 @@ export async function createPane(
 
     // Auto-approve trust prompts for Claude (workspace trust, not edit permissions)
     // Note: --permission-mode=acceptEdits handles edit permissions, but not workspace trust
-    autoApproveTrustPrompt(paneInfo, prompt).catch(() => {
-      // Ignore errors in background monitoring
-    });
+    // Skip auto-approval if using --dangerously-skip-permissions (it already skips all prompts)
+    if (!settings.skipPermissions) {
+      autoApproveTrustPrompt(paneInfo, prompt).catch(() => {
+        // Ignore errors in background monitoring
+      });
+    }
   } else if (agent === 'opencode') {
     await tmuxService.sendShellCommand(paneInfo, 'opencode');
     await tmuxService.sendTmuxKeys(paneInfo, 'Enter');

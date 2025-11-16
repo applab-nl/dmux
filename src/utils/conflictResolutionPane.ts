@@ -29,6 +29,11 @@ export async function createConflictResolutionPane(
   const { sourceBranch, targetBranch, targetRepoPath, agent, projectName, existingPanes } = options;
   const tmuxService = TmuxService.getInstance();
 
+  // Load settings to check for skipPermissions
+  const { SettingsManager } = await import('./settingsManager.js');
+  const settingsManager = new SettingsManager(targetRepoPath);
+  const settings = settingsManager.getSettings();
+
   // Generate slug for this conflict resolution session
   const slug = `merge-${sourceBranch}-into-${targetBranch}`.substring(0, 50);
 
@@ -98,21 +103,29 @@ export async function createConflictResolutionPane(
 
   // Launch agent with the conflict resolution prompt
   if (agent === 'claude') {
+    // Determine permission flag based on settings
+    const permissionFlag = settings.skipPermissions
+      ? '--dangerously-skip-permissions'
+      : '--permission-mode=acceptEdits';
+
     const escapedPrompt = prompt
       .replace(/\\/g, '\\\\')
       .replace(/"/g, '\\"')
       .replace(/`/g, '\\`')
       .replace(/\$/g, '\\$');
-    const claudeCmd = `claude "${escapedPrompt}" --permission-mode=acceptEdits`;
+    const claudeCmd = `claude "${escapedPrompt}" ${permissionFlag}`;
 
     await tmuxService.sendShellCommand(paneInfo, claudeCmd);
     await tmuxService.sendTmuxKeys(paneInfo, 'Enter');
 
     // Auto-approve trust prompts for Claude (workspace trust, not edit permissions)
     // Note: --permission-mode=acceptEdits handles edit permissions, but not workspace trust
-    autoApproveTrustPrompt(paneInfo).catch(() => {
-      // Ignore errors in background monitoring
-    });
+    // Skip auto-approval if using --dangerously-skip-permissions (it already skips all prompts)
+    if (!settings.skipPermissions) {
+      autoApproveTrustPrompt(paneInfo).catch(() => {
+        // Ignore errors in background monitoring
+      });
+    }
   } else if (agent === 'opencode') {
     await tmuxService.sendShellCommand(paneInfo, 'opencode');
     await tmuxService.sendTmuxKeys(paneInfo, 'Enter');

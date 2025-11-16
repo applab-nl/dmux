@@ -24,6 +24,12 @@ export const SETTING_DEFINITIONS: SettingDefinition[] = [
     ],
   },
   {
+    key: 'skipPermissions',
+    label: 'Skip Permissions (Dangerous)',
+    description: 'Launch Claude with --dangerously-skip-permissions instead of --permission-mode=acceptEdits. WARNING: This disables all permission prompts.',
+    type: 'boolean',
+  },
+  {
     key: 'hooks' as any,
     label: 'Manage Hooks',
     description: 'View and edit dmux lifecycle hooks',
